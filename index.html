@@ -87,15 +87,28 @@
     <section>
       <p class="label">Quick Start</p>
       <pre><code><span class="c"># pip install marketlens</span>
-from marketlens import MarketLens
+from marketlens import MarketLens, Strategy
+
+class ValueBuyer(Strategy):
+    def on_market_start(self, ctx, market, book):
+        self._entered = False
+
+    def on_trade(self, ctx, market, book, trade):
+        if self._entered:
+            return
+        if book.midpoint &lt; 0.35:
+            ctx.buy_yes(size=100)
+            self._entered = True
 
 client = MarketLens()
-markets = client.markets.list(
-    q="bitcoin", status="active",
-    sort="-liquidity", take=5,
+result = client.backtest(
+    strategy=ValueBuyer(),
+    id="btc-up-or-down-5m",
+    initial_cash=10_000,
+    after="2026-04-15T01:45:00Z",
+    before="2026-04-15T01:50:00Z",
 )
-for m in markets:
-    print(m.question, m.outcomes[0].last_price)</code></pre>
+print(result.summary())</code></pre>
       <p style="margin-top: 0.9rem; font-size: 0.9rem;">
         Free API keys at <a href="https://marketlens.trade">marketlens.trade</a>;
         the <a href="https://marketlens.trade/docs">Getting Started guide</a> covers
