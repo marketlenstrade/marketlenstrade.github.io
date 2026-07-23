@@ -6,39 +6,136 @@
   <title>Marketlens on GitHub: Polymarket Order Book Data and Backtesting</title>
   <meta name="description" content="Marketlens open source projects: the marketlens Python SDK for tick level Polymarket order book history, book replay, and backtesting with realistic execution.">
   <link rel="canonical" href="https://marketlenstrade.github.io/">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareSourceCode",
+    "name": "marketlens-python",
+    "description": "Python SDK for Polymarket order book data and backtesting. Tick-level L2 snapshots, billions of deltas, full book reconstruction, and a strategy backtesting engine with realistic execution.",
+    "url": "https://marketlenstrade.github.io/",
+    "codeRepository": "https://github.com/marketlenstrade/marketlens-python",
+    "programmingLanguage": "Python",
+    "license": "https://opensource.org/licenses/MIT"
+  }
+  </script>
   <style>
-    body { font-family: Georgia, serif; max-width: 42rem; margin: 0 auto; padding: 3rem 1.5rem; line-height: 1.6; color: #1a1a1a; background: #faf9f7; }
-    h1 { font-size: 1.6rem; letter-spacing: -0.01em; }
-    a { color: #c2410c; }
-    code { font-family: ui-monospace, monospace; background: #efece7; padding: 0.1em 0.3em; font-size: 0.9em; }
-    ul { padding-left: 1.2rem; }
-    li { margin-bottom: 0.6rem; }
-    footer { margin-top: 3rem; font-size: 0.85rem; color: #666; }
+    :root {
+      --bg: #F9F6F1; --ink: #1B1915; --secondary: #635C52; --tertiary: #9A9288;
+      --vermillion: #C44B28; --vermillion-deep: #A33A1C;
+      --border: #DBD5C9; --border-light: #EDE9E0; --contrast: #1B1915;
+    }
+    * { box-sizing: border-box; margin: 0; }
+    body {
+      font-family: Inter, system-ui, sans-serif; background: var(--bg); color: var(--ink);
+      line-height: 1.65; padding: 0 1.5rem;
+    }
+    main { max-width: 44rem; margin: 0 auto; padding: 4rem 0 2rem; }
+    .label {
+      font-family: ui-monospace, Menlo, monospace; font-size: 11px; text-transform: uppercase;
+      letter-spacing: 0.08em; color: var(--vermillion); margin-bottom: 0.75rem;
+    }
+    h1 {
+      font-family: Newsreader, Georgia, serif; font-weight: 500; font-size: 2.4rem;
+      line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 1rem;
+    }
+    h2 {
+      font-family: Newsreader, Georgia, serif; font-weight: 500; font-size: 1.35rem;
+      letter-spacing: -0.01em; margin: 0 0 0.6rem;
+    }
+    section { margin-top: 3rem; padding-top: 2.25rem; border-top: 1px solid var(--border-light); }
+    p.lede { font-size: 1.06rem; color: var(--secondary); max-width: 40rem; }
+    p { color: var(--secondary); }
+    a { color: var(--vermillion); text-decoration: underline; text-underline-offset: 2px; }
+    a:hover { color: var(--vermillion-deep); }
+    pre {
+      background: var(--contrast); color: #E8E4DC; padding: 1.1rem 1.25rem; overflow-x: auto;
+      font-family: ui-monospace, Menlo, monospace; font-size: 0.82rem; line-height: 1.7;
+      margin-top: 1rem;
+    }
+    pre .c { color: #9A9288; }
+    code { font-family: ui-monospace, Menlo, monospace; font-size: 0.9em; background: var(--border-light); padding: 0.1em 0.35em; }
+    pre code { background: none; padding: 0; }
+    ul.plain { list-style: none; padding: 0; margin-top: 1rem; }
+    ul.plain li { padding: 0.55rem 0; border-bottom: 1px solid var(--border-light); color: var(--secondary); }
+    ul.plain li strong { color: var(--ink); font-weight: 600; }
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 0.75rem; margin-top: 1.25rem; }
+    .card {
+      display: block; border: 1px solid var(--border); background: #FDFBF7; padding: 0.9rem 1rem;
+      text-decoration: none; transition: border-color 0.15s;
+    }
+    .card:hover { border-color: var(--vermillion); }
+    .card b { display: block; color: var(--ink); font-weight: 600; font-size: 0.92rem; }
+    .card span { color: var(--tertiary); font-size: 0.8rem; }
+    footer {
+      max-width: 44rem; margin: 0 auto; padding: 2rem 0 3rem; border-top: 1px solid var(--border-light);
+      font-size: 0.82rem; color: var(--tertiary);
+    }
   </style>
 </head>
 <body>
-  <h1>Marketlens on GitHub</h1>
-  <p>
-    Marketlens collects and serves historical order book data for Polymarket
-    prediction markets: tick level L2 snapshots and deltas, trades, candles,
-    and Parquet exports, with a backtesting engine that simulates queue
-    priority, latency, and slippage.
-  </p>
-  <ul>
-    <li>
-      <a href="https://github.com/marketlenstrade/marketlens-python">marketlens-python</a>:
-      the open source Python SDK, backtest engine, and MCP server.
-      Install with <code>pip install marketlens</code>.
-    </li>
-    <li>
-      <a href="https://pypi.org/project/marketlens/">marketlens on PyPI</a>:
-      the released package, supported on Python 3.10 through 3.13.
-    </li>
-    <li>
-      <a href="https://marketlens.trade/docs">Documentation</a>:
-      getting started, data reference, and backtesting guides.
-    </li>
-  </ul>
+  <main>
+    <p class="label">Marketlens · Open Source</p>
+    <h1>Polymarket order book history, replayed tick by tick.</h1>
+    <p class="lede">
+      Marketlens collects the full L2 order book of Polymarket prediction markets
+      and serves it as tick level snapshots and deltas, executed trades, candles,
+      and Parquet exports. The open source Python SDK reconstructs books at any
+      millisecond and backtests strategies against them with realistic execution:
+      queue priority, latency, and slippage.
+    </p>
+
+    <section>
+      <p class="label">Quick Start</p>
+      <pre><code><span class="c"># pip install marketlens</span>
+from marketlens import MarketLens
+
+client = MarketLens()
+markets = client.markets.list(
+    q="bitcoin", status="active",
+    sort="-liquidity", take=5,
+)
+for m in markets:
+    print(m.question, m.outcomes[0].last_price)</code></pre>
+      <p style="margin-top: 0.9rem; font-size: 0.9rem;">
+        Free API keys at <a href="https://marketlens.trade">marketlens.trade</a>;
+        the <a href="https://marketlens.trade/docs">Getting Started guide</a> covers
+        auth, order books, and a first backtest.
+      </p>
+    </section>
+
+    <section>
+      <p class="label">What's Inside</p>
+      <h2>The data and the tools</h2>
+      <ul class="plain">
+        <li><strong>Order books</strong>: L2 snapshots plus incremental deltas, reconstructable at millisecond resolution, nothing interpolated.</li>
+        <li><strong>Trades and candles</strong>: executed trades and OHLCV aggregations across every collected market.</li>
+        <li><strong>Backtesting</strong>: subclass <code>Strategy</code> hooks (<code>on_book</code>, <code>on_trade</code>, <code>on_fill</code>) and run against historical books with simulated queue position, latency, slippage, and fees.</li>
+        <li><strong>Exports</strong>: bulk Parquet downloads that feed straight into offline backtest runs.</li>
+        <li><strong>MCP server</strong>: hand the same data and backtest engine to AI agents over the Model Context Protocol.</li>
+      </ul>
+      <p style="margin-top: 1rem; font-size: 0.9rem;">
+        Order book history starts on 2026-03-01, with continuous coverage since 2026-04-13.
+      </p>
+    </section>
+
+    <section>
+      <p class="label">Projects</p>
+      <div class="cards">
+        <a class="card" href="https://github.com/marketlenstrade/marketlens-python">
+          <b>marketlens-python</b>
+          <span>SDK, backtest engine, MCP server (MIT)</span>
+        </a>
+        <a class="card" href="https://pypi.org/project/marketlens/">
+          <b>marketlens on PyPI</b>
+          <span>Released package, Python 3.10 to 3.13</span>
+        </a>
+        <a class="card" href="https://marketlens.trade/docs">
+          <b>Documentation</b>
+          <span>Data reference and backtesting guides</span>
+        </a>
+      </div>
+    </section>
+  </main>
   <footer>
     <a href="https://marketlens.trade">marketlens.trade</a> ·
     <a href="https://github.com/marketlenstrade">github.com/marketlenstrade</a>
